@@ -1,8 +1,11 @@
 ---
 title: "Final Project"
 subtitle: "Data Science for Biologists, Spring 2021"
-author: "Your name goes here"
-output: html_document
+author: "Vinny Varghese"
+output:
+  html_document: 
+    theme: sandstone 
+    highlight: breezedark 
 editor_options: 
   chunk_output_type: console
 ---
@@ -11,14 +14,29 @@ editor_options:
 # DON'T CHANGE THE NEXT LINE, except to add NEW options if you have any.
 knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = TRUE, include = TRUE)
 
-# Load all libraries you use HERE:
+# Load all libraries you use HERE:  
+library(tidyverse)
+library(broom)
+library(modelr)
+library(pROC)
+
+
 ```
 
 <br><br>
 
-## Introduction
+## Introduction  
+
+**The data set that I chose was from kaggle.com, and it is called heart.csv. This dataset analyzes heart attacks and some of the factors that goes into predicting if a person will have a heart attack. Since I want to go into the medical field, this data set caught my eye. If using the techniques we learned in class this year can do an accurate job at predicting heart attacks, it will bode well for the future of the medical field.** 
+
+
+This is the link to the [Heart Attack Dataset](https://www.kaggle.com/rashikrahmanpritom/heart-attack-analysis-prediction-dataset)  
 
 ```{r read-examine-data}
+heart <- read_csv("varghese_heart.csv") 
+heart
+
+dplyr::glimpse(heart)   
 
 ```
 
@@ -26,13 +44,26 @@ knitr::opts_chunk$set(warning=FALSE, message=FALSE, echo = TRUE, include = TRUE)
 
 ## Question 1
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Does resting blood pressure increase as you get older?
 
-### Methods
+### Methods 
+
+```{r Question 1 code} 
+heart %>% 
+  select(age, trtbps) %>% #use select to keep only age and resting blood pressure to find the relationship  
+
+ggplot() + 
+  aes(x = age, y = trtbps) + #make age the x variable and trtbps the y variable  
+  geom_point(size = 2, 
+             color = "springgreen2") + #geom_point should be used for the wide variety of points in the data and make it a size that can be visibly seen  
+  geom_smooth(method = lm) #use geom_smooth to have a line of best fit to show the overall strength of the relationship between the two variables 
+  
+
+```
 
 ### Answer
 
-Replace this text with your answer to your question.
+As seen by the scatter plot visual, there is a fairly strong relationship between these variables. Therefore, we can conclude that resting blood pressure tends to increase with age. 
 
 
 <br><br>
