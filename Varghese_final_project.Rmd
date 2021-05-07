@@ -83,9 +83,9 @@ heart %>%
   geom_smooth(method = lm) #use geom_smooth to get a line of best fit 
 
 
-
-
 ```
+
+
 ### Answer
 
 This dataset does indeed show that there is a negative relationship between age and maximum heart rate. This confirms the general belief of the relationship of maximum heart rate of each individual over time. 
@@ -94,22 +94,42 @@ This dataset does indeed show that there is a negative relationship between age 
 
 ## Question 3
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Using Linear regression, to what extent does age explain variation in cholesterol? Is there a significant relationship between these variables(use scatterplot)?
 
-### Methods
+### Methods 
+
+```{r perform model_selection and visualize}
+fitted_model <- lm(chol ~ age, data = heart)
+
+summary(fitted_model) 
+
+broom::tidy(fitted_model) 
+
+modelr::rsquare(fitted_model, heart) 
+
+heart %>% 
+  select(chol, age) %>% 
+  
+  ggplot(aes(x = age, y = chol)) + 
+  geom_point(size = 2, 
+             color = "darkorange") + 
+  geom_smooth(method = lm) 
+
+
+```
 
 ### Answer
 
-Replace this text with your answer to your question.
+Although there is a relationship between between cholesterol level and age, it is fairly weak. The model that we built explains that 4.6% of variation in cholesterol is explained by age which isn't significant. 
 
 
 <br><br>
 
 ## Question 4
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Which sex has the highest average cholesterol level according to this dataset?
 
-### Methods
+### Methods 
 
 ### Answer
 
