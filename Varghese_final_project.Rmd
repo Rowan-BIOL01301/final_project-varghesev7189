@@ -44,7 +44,7 @@ dplyr::glimpse(heart)
 
 ## Question 1
 
-#### Does resting blood pressure increase as you get older?
+#### According to healthline.com, "As you age, the vascular system changes. This includes your heart and blood vessels. In the blood vessels, there's a reduction in elastic tissue in your arteries, causing them to become stiffer and less compliant. As a result your blood pressure increases." Knowing this information, can this same knowledge be applied for the variable of resting blood pressure in this dataset?(Does resting blood pressure increase as you get older?)
 
 ### Methods 
 
@@ -70,13 +70,25 @@ As seen by the scatter plot visual, there is a fairly strong relationship betwee
 
 ## Question 2
 
-#### REPLACE TEXT WITH YOUR QUESTION. Your question should literally be a level-4 header.
+#### Does this dataset show a decrease in maximum heart rate as age increases? 
 
-### Methods
+### Methods 
+```{r Max HR vs Age}
+heart %>% 
+  select(age, thalachh) %>% #make sure to keep only the age and the maximum heart rate(thalachh) 
+  
+  ggplot(aes(x = age, y = thalachh)) + #age is the independent variable(x) and we are trying to see how max heart rate changes over time(y) 
+  geom_point(size = 2, 
+             color = "darkorchid1") + 
+  geom_smooth(method = lm) #use geom_smooth to get a line of best fit 
 
+
+
+
+```
 ### Answer
 
-Replace this text with your answer to your question.
+This dataset does indeed show that there is a negative relationship between age and maximum heart rate. This confirms the general belief of the relationship of maximum heart rate of each individual over time. 
 
 <br><br>
 
